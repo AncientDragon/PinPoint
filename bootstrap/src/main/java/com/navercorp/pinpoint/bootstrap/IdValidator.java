@@ -30,7 +30,7 @@ public class IdValidator {
     private final BootLogger logger = BootLogger.getLogger(IdValidator.class.getName());
 
     private final Properties property;
-    private static final int MAX_ID_LENGTH = 24;
+    private static final int MAX_ID_LENGTH = 50;
 
     public IdValidator() {
         this(System.getProperties());
