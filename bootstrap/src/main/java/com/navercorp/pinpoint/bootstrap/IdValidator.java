@@ -18,6 +18,7 @@
 package com.navercorp.pinpoint.bootstrap;
 
 import com.navercorp.pinpoint.bootstrap.util.IdValidateUtils;
+import com.navercorp.pinpoint.bootstrap.util.NetworkUtils;
 
 
 import java.util.Properties;
@@ -77,6 +78,13 @@ public class IdValidator {
     }
 
     public String getAgentId() {
-        return this.getValidId("pinpoint.agentId", MAX_ID_LENGTH);
+        String agentId =  this.getValidId("pinpoint.agentId", MAX_ID_LENGTH);
+        // generate a agentId if it's not been set
+        if (agentId == null || "".equals(agentId.trim())) {
+            String machineName = NetworkUtils.getHostName();
+            String hostIp = NetworkUtils.getRepresentationHostIp();
+            agentId = hostIp + ":" + machineName;
+        }
+        return agentId;
     }
 }

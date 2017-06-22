@@ -71,10 +71,10 @@ public final class NetworkUtils {
 
         List<String> ipList = getHostIpList();
         if (!ipList.isEmpty()) {
-            return ipList.get(0);
+            ip = ipList.get(ipList.size() - 1);
         }
 
-        return LOOPBACK_ADDRESS_V4_1;
+        return ip == null ? LOOPBACK_ADDRESS_V4_1 : ip;
     }
 
     public static String getHostIp() {
