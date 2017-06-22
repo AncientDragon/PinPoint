@@ -33,7 +33,10 @@ public class IdValidator {
     private static final int MAX_ID_LENGTH = 50;
 
     public IdValidator() {
-        this(System.getProperties());
+        property = new Properties();
+        property.putAll(System.getenv());
+        property.putAll(System.getProperties());
+        //this(props);
     }
 
     public IdValidator(Properties property) {

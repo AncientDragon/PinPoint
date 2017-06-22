@@ -66,7 +66,7 @@ public class DefaultTransformerRegistry implements TransformerRegistry {
         ClassFileTransformer old = registry.put(classInternalName, transformer);
         
         if (old != null) {
-            throw new IllegalStateException("Transformer already exist. className:" + classInternalName + " new:" + transformer.getClass() + " old:" + old.getClass());
+            //throw new IllegalStateException("Transformer already exist. className:" + classInternalName + " new:" + transformer.getClass() + " old:" + old.getClass());
         }
     }
 }
