@@ -74,16 +74,23 @@ public class IdValidator {
 
 
     public String getApplicationName() {
-        return this.getValidId("pinpoint.applicationName", MAX_ID_LENGTH);
+        String applicationName =  this.getValidId("pinpoint.applicationName", MAX_ID_LENGTH);
+        if (applicationName == null || "".equals(applicationName.trim())) {
+            applicationName = this.getValidId("pinpoint_applicationName", MAX_ID_LENGTH);
+        }
+        return applicationName;
     }
 
     public String getAgentId() {
         String agentId =  this.getValidId("pinpoint.agentId", MAX_ID_LENGTH);
+        if (agentId == null || "".equals(agentId.trim())) {
+            agentId =  this.getValidId("pinpoint_agentId", MAX_ID_LENGTH);
+        }
         // generate a agentId if it's not been set
         if (agentId == null || "".equals(agentId.trim())) {
             String machineName = NetworkUtils.getHostName();
             String hostIp = NetworkUtils.getRepresentationHostIp();
-            agentId = hostIp + ":" + machineName;
+            agentId = hostIp + "_" + machineName;
         }
         return agentId;
     }

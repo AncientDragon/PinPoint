@@ -91,6 +91,9 @@ class PinpointStarter {
             return false;
         }
 
+        logger.info("agentId: " + agentId);
+        logger.info("applicationName: " + applicationName);
+
         URL[] pluginJars = classPathResolver.resolvePlugins();
 
         // TODO using PLogger instead of CommonLogger
