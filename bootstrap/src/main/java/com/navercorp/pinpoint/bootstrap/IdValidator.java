@@ -88,9 +88,9 @@ public class IdValidator {
         }
         // generate a agentId if it's not been set
         if (agentId == null || "".equals(agentId.trim())) {
-            String machineName = NetworkUtils.getHostName();
+            //String machineName = NetworkUtils.getHostName();
             String hostIp = NetworkUtils.getRepresentationHostIp();
-            agentId = hostIp + "_" + machineName;
+            agentId = hostIp + "_"  + getApplicationName();
         }
         return agentId;
     }
