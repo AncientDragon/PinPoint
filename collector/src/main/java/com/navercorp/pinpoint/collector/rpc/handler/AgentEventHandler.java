@@ -24,6 +24,7 @@ import com.navercorp.pinpoint.common.server.util.AgentEventType;
 import com.navercorp.pinpoint.common.server.util.AgentEventTypeCategory;
 import com.navercorp.pinpoint.rpc.packet.HandshakePropertyType;
 import com.navercorp.pinpoint.rpc.server.PinpointServer;
+import com.navercorp.pinpoint.rpc.util.StringUtils;
 import com.navercorp.pinpoint.thrift.dto.command.TCommandTransfer;
 import com.navercorp.pinpoint.thrift.dto.command.TCommandTransferResponse;
 import com.navercorp.pinpoint.thrift.dto.command.TRouteResult;
@@ -76,8 +77,11 @@ public class AgentEventHandler {
         }
 
         Map<Object, Object> channelProperties = pinpointServer.getChannelProperties();
-
+        if (channelProperties == null || channelProperties.isEmpty())
+            return;
         final String agentId = MapUtils.getString(channelProperties, HandshakePropertyType.AGENT_ID.getName());
+        if (StringUtils.isEmpty(agentId))
+            return;
         final long startTimestamp = MapUtils.getLong(channelProperties,
                 HandshakePropertyType.START_TIMESTAMP.getName());
 
